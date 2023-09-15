@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node --env-file .env --loader ts-node/esm --inspect src/index.ts",
+    "dev": "node --watch --env-file .env --loader ts-node/esm --inspect src/index.ts",
     "build": "rimraf ./build && npx tsc",
     "start": "node --env-file .env build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
