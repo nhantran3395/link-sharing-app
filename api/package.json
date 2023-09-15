@@ -1,0 +1,26 @@
+{
+  "name": "link-sharing-api",
+  "version": "0.0.1",
+  "description": "API of the link sharing app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "Prisma",
+    "PostgreSQL"
+  ],
+  "author": "Nhan Tran",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.6.1",
+    "prisma": "^5.3.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.3.1"
+  }
+}
