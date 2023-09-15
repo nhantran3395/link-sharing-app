@@ -1,8 +1,12 @@
 import express from 'express';
-import * as process from "process";
+import morgan from 'morgan';
+
+import * as process from "node:process";
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+app.use(morgan('short'));
 
 app.get('/ping',(req, res) => {
     res.json({
