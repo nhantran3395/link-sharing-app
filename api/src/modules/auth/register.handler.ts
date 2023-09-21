@@ -1,34 +1,8 @@
 import { Request, Response } from 'express';
 
 import { hashPassword } from './auth.helper.ts';
-import { DatabaseClient } from '../../infra/index.ts';
-
-interface CreateUserWithProfileProps {
-	email: string;
-	password: string;
-	firstName: string;
-	lastName: string;
-}
-
-async function createUserWithProfile({
-	email,
-	password,
-	firstName,
-	lastName,
-}: CreateUserWithProfileProps) {
-	await DatabaseClient.user.create({
-		data: {
-			email,
-			password,
-			profile: {
-				create: {
-					firstName,
-					lastName,
-				},
-			},
-		},
-	});
-}
+import { createUserWithProfile } from '../../repositories/index.ts';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../messages.ts';
 
 export default async function registerHandler(req: Request, res: Response) {
 	console.debug('inside register user handler');
@@ -51,7 +25,7 @@ export default async function registerHandler(req: Request, res: Response) {
 		res.status(200);
 		res.json({
 			ok: true,
-			message: 'user created successfully',
+			message: SUCCESS_MESSAGE.USER_CREATE_SUCCESS,
 		});
 	} catch (error) {
 		if (error instanceof Error) {
@@ -63,7 +37,7 @@ export default async function registerHandler(req: Request, res: Response) {
 		res.status(500);
 		res.json({
 			ok: false,
-			message: 'something unexpected happened on the server',
+			message: ERROR_MESSAGE.SERVER_ERROR,
 		});
 	}
 }

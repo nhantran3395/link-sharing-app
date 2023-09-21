@@ -1,18 +1,8 @@
 import { Request, Response } from 'express';
 
 import { generateToken, comparePassword } from './auth.helper.ts';
-import { DatabaseClient } from '../../infra/index.ts';
-
-async function getUser(email: string) {
-	return await DatabaseClient.user.findUnique({
-		where: {
-			email,
-		},
-		include: {
-			profile: true,
-		},
-	});
-}
+import { getUser } from '../../repositories/index.ts';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../messages.ts';
 
 export default async function loginHandler(req: Request, res: Response) {
 	const { email, password } = req.body;
@@ -22,7 +12,7 @@ export default async function loginHandler(req: Request, res: Response) {
 	if (!user) {
 		res.status(400).json({
 			ok: false,
-			message: 'email or password is not valid',
+			message: ERROR_MESSAGE.LOGIN_INVALID_CREDENTIAL,
 		});
 		return;
 	}
@@ -34,7 +24,7 @@ export default async function loginHandler(req: Request, res: Response) {
 	if (!isValid) {
 		res.status(400).json({
 			ok: false,
-			message: 'email or password is not valid',
+			message: ERROR_MESSAGE.LOGIN_INVALID_CREDENTIAL,
 		});
 		return;
 	}
@@ -45,7 +35,7 @@ export default async function loginHandler(req: Request, res: Response) {
 		console.error('JWT secret is missing');
 		res.status(500).json({
 			ok: false,
-			message: 'something unexpected happened on the server',
+			message: ERROR_MESSAGE.SERVER_ERROR,
 		});
 		return;
 	}
@@ -54,7 +44,7 @@ export default async function loginHandler(req: Request, res: Response) {
 		console.error('profile is expected but does not exist');
 		res.status(500).json({
 			ok: false,
-			message: 'something unexpected happened on the server',
+			message: ERROR_MESSAGE.SERVER_ERROR,
 		});
 		return;
 	}
@@ -63,7 +53,7 @@ export default async function loginHandler(req: Request, res: Response) {
 
 	res.status(200).json({
 		ok: true,
-		message: 'login success',
+		message: SUCCESS_MESSAGE.LOGIN_SUCCESS,
 		token: generateToken(email, profileId, jwtSecret),
 	});
 }

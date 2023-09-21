@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import process from 'node:process';
 
 import { checkToken } from './auth.helper.ts';
+import { ERROR_MESSAGE } from '../../messages.ts';
 
 declare module 'express-serve-static-core' {
 	interface Request {
@@ -21,7 +22,7 @@ export default function tokenMiddleware(
 	if (!bearer) {
 		res.status(401).json({
 			ok: false,
-			message: 'must have a bearer token',
+			message: ERROR_MESSAGE.AUTH_BEARER_TOKEN_NOT_EXIST,
 		});
 		return;
 	}
@@ -30,7 +31,7 @@ export default function tokenMiddleware(
 	if (!token) {
 		res.status(401).json({
 			ok: false,
-			message: 'invalid bearer token format',
+			message: ERROR_MESSAGE.AUTH_TOKEN_INVALID_FORMAT,
 		});
 		return;
 	}
@@ -41,7 +42,7 @@ export default function tokenMiddleware(
 		console.error('JWT secret is missing');
 		res.status(500).json({
 			ok: false,
-			message: 'something unexpected happened on the server',
+			message: ERROR_MESSAGE.SERVER_ERROR,
 		});
 		return;
 	}
@@ -53,14 +54,14 @@ export default function tokenMiddleware(
 	} catch (error) {
 		res.status(401).json({
 			ok: false,
-			message: 'token is invalid',
+			message: ERROR_MESSAGE.AUTH_TOKEN_INVALID,
 		});
 	}
 
 	if (typeof payload === 'string') {
 		res.status(400).json({
 			ok: false,
-			message: 'type of JWT payload is invalid',
+			message: ERROR_MESSAGE.AUTH_INVALID_TOKEN_PAYLOAD,
 		});
 		return;
 	}
