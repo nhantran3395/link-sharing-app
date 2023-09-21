@@ -4,6 +4,7 @@ export const ERROR_MESSAGE = {
 	AUTH_TOKEN_INVALID: 'token is invalid',
 	AUTH_INVALID_TOKEN_PAYLOAD: 'type of JWT payload is invalid',
 	LOGIN_INVALID_CREDENTIAL: 'email or password is not valid',
+	REGISTER_EMAIL_ALREADY_EXIST: 'a user with this email already exists',
 	SERVER_ERROR: 'something unexpected happened on the server',
 };
 
