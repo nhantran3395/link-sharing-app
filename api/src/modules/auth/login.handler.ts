@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { generateToken, comparePassword } from './auth.helper.ts';
 import { getUser } from '../../repositories/index.ts';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../messages.ts';
+import { CONFIGS } from '../../configs.ts';
 
 export default async function loginHandler(req: Request, res: Response) {
 	const { email, password } = req.body;
@@ -29,16 +30,7 @@ export default async function loginHandler(req: Request, res: Response) {
 		return;
 	}
 
-	const jwtSecret = process.env.JWT_SECRET;
-
-	if (!jwtSecret) {
-		console.error('JWT secret is missing');
-		res.status(500).json({
-			ok: false,
-			message: ERROR_MESSAGE.SERVER_ERROR,
-		});
-		return;
-	}
+	const jwtSecret = CONFIGS.JWT_SECRET;
 
 	if (!profile) {
 		console.error('profile is expected but does not exist');

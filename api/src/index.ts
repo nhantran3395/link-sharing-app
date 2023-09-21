@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import * as process from 'node:process';
+import { CONFIGS } from './configs.ts';
 
 import {
 	registerHandler,
@@ -11,7 +11,7 @@ import {
 } from './modules/auth/index.ts';
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = CONFIGS.PORT;
 
 app.use(cors());
 app.use(morgan('short'));

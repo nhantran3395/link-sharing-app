@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-import process from 'node:process';
-
 import { checkToken } from './auth.helper.ts';
 import { ERROR_MESSAGE } from '../../messages.ts';
+import { CONFIGS } from '../../configs.ts';
 
 declare module 'express-serve-static-core' {
 	interface Request {
@@ -36,17 +35,7 @@ export default function tokenMiddleware(
 		return;
 	}
 
-	const secret = process.env.JWT_SECRET;
-
-	if (!secret) {
-		console.error('JWT secret is missing');
-		res.status(500).json({
-			ok: false,
-			message: ERROR_MESSAGE.SERVER_ERROR,
-		});
-		return;
-	}
-
+	const secret = CONFIGS.JWT_SECRET;
 	let payload: string | jwt.JwtPayload = {};
 
 	try {
@@ -56,6 +45,7 @@ export default function tokenMiddleware(
 			ok: false,
 			message: ERROR_MESSAGE.AUTH_TOKEN_INVALID,
 		});
+		return;
 	}
 
 	if (typeof payload === 'string') {
