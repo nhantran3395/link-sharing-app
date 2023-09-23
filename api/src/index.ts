@@ -1,39 +1,9 @@
-import express from 'express';
-import morgan from 'morgan';
-import cors from 'cors';
-
+import { createServer } from './server.ts';
 import { CONFIGS } from './configs.ts';
 
-import {
-	registerHandler,
-	tokenMiddleware,
-	loginHandler,
-} from './modules/auth/index.ts';
-
-const app = express();
+const server = createServer();
 const port = CONFIGS.PORT;
 
-app.use(cors());
-app.use(morgan('short'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.get('/ping', (_req, res) => {
-	res.json({
-		message: 'pong',
-	});
-});
-
-app.post('/login', loginHandler);
-
-app.post('/register', registerHandler);
-
-app.get('/profiles/:id', tokenMiddleware, (_req, res) => {
-	res.status(200).json({
-		ok: true,
-	});
-});
-
-app.listen(port, () => {
-	console.log(`Server is running on port ${port}`);
+server.listen(port, () => {
+	console.log(`server listening on ${port}`);
 });
