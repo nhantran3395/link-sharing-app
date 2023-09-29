@@ -2,11 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 
-import {
-	registerHandler,
-	tokenMiddleware,
-	loginHandler,
-} from './modules/auth/index.ts';
+import { registerHandler, tokenMiddleware, loginHandler } from './modules/auth';
 
 export function createServer() {
 	const server = express();

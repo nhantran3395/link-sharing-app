@@ -1,3 +1,3 @@
-import DatabaseClient from './database-client.ts';
+import DatabaseClient from './database-client';
 
 export { DatabaseClient };

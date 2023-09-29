@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
-import { generateToken, comparePassword } from './auth.helper.ts';
-import { getUser } from '../../repositories/index.ts';
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../messages.ts';
-import { CONFIGS } from '../../configs.ts';
+import { generateToken, comparePassword } from './auth.helper';
+import { getUser } from '../../repositories';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../messages';
+import { CONFIGS } from '../../configs';
 
 export default async function loginHandler(req: Request, res: Response) {
 	const { email, password } = req.body;
