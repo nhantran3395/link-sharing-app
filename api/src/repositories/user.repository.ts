@@ -1,4 +1,4 @@
-import { DatabaseClient } from '../infra/index.ts';
+import { DatabaseClient } from '../infra/index';
 
 export async function getUser(email: string) {
 	return await DatabaseClient.user.findUnique({

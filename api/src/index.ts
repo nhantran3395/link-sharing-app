@@ -1,5 +1,5 @@
-import { createServer } from './server.ts';
-import { CONFIGS } from './configs.ts';
+import { createServer } from './server';
+import { CONFIGS } from './configs';
 
 const server = createServer();
 const port = CONFIGS.PORT;

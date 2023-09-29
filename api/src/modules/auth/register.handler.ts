@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { hashPassword } from './auth.helper.ts';
-import { createUserWithProfile } from '../../repositories/index.ts';
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../messages.ts';
+import { hashPassword } from './auth.helper';
+import { createUserWithProfile } from '../../repositories';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../messages';
 
 interface UniqueConstraintViolationError {
 	name: 'PrismaClientKnownRequestError';

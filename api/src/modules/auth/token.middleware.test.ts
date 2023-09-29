@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 
-import { createServer } from '../../server.ts';
+import { createServer } from '../../server';
 
 describe('tokenMiddleware', () => {
 	it('request is rejected when there is no token', async () => {

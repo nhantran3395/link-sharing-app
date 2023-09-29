@@ -1,4 +1,4 @@
-import { hashPassword, comparePassword } from './auth.helper.ts';
+import { hashPassword, comparePassword } from './auth.helper';
 
 const PATTERN = new RegExp('^\\$2[ayb]\\$.{56}$');
 const SALT_ROUNDS = 10;

@@ -1,5 +1,5 @@
-import loginHandler from './login.handler.ts';
-import registerHandler from './register.handler.ts';
-import tokenMiddleware from './token.middleware.ts';
+import loginHandler from './login.handler';
+import registerHandler from './register.handler';
+import tokenMiddleware from './token.middleware';
 
 export { loginHandler, registerHandler, tokenMiddleware };

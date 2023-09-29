@@ -3,10 +3,10 @@ import supertest from 'supertest';
 
 import * as crypto from 'node:crypto';
 
-import { createServer } from './server.ts';
-import { createUserWithProfile, getUser } from './repositories/index.ts';
+import { createServer } from './server';
+import { createUserWithProfile, getUser } from './repositories';
 
-jest.mock('./repositories/index.ts', () => {
+jest.mock('./repositories', () => {
 	return {
 		createUserWithProfile: jest.fn(),
 		getUser: jest.fn(),
